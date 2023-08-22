@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 
@@ -35,5 +36,12 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/*********************** UTILS ***/
+/* helper_1 */
+size_t line_count(void);
+
+/* extract_l */
+char *extract_line(int fd);
 
 #endif

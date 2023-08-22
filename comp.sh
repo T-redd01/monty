@@ -1,6 +1,6 @@
 #!/bin/bash
 flags="-Wall -Werror -Wextra -pedantic -std=c89"
-name="monty"
+name="p"
 
 if [ $# -gt 0 ]
 then
