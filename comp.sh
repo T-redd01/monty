@@ -9,7 +9,7 @@ then
 		echo "debug mode"
 		if [ $# -eq 1 ]
 		then
-			gcc *.c -o $name 2> errfile
+			gcc -g *.c -o $name 2> errfile
 		else
 			echo "capture from 2"
 			#gcc "${@:2}" -o $name 2> errfile

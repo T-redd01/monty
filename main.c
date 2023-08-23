@@ -1,33 +1,46 @@
 #include "monty.h"
 
-int main(int ac, char **av) {
-	int fd;
-	size_t count = 0;
-	char *line = NULL;
+char *val;
 
+/**
+ * main - Entry point
+ * @ac: number of args passed
+ * @av: vector of passed args
+ *
+ * Return: on success EXIT_SUCCESS, on fail EXIT_FAIL
+ */
+int main(int ac, char **av)
+{
+	cache_t mm;
 
 	if (ac != 2)
 	{
-		dprintf(2, "USAGE: monty file\n");
+		err_writer("USAGE: monty file\n", NULL, NULL, NULL);
 		return (EXIT_FAILURE);
 	}
 
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
+	mm.fd = open(av[1], O_RDONLY);
+	if (mm.fd == -1)
 	{
-		dprintf(2, "Error: Can't open file %s\n", av[0]);
+		err_writer("Error: Can't open file ", av[1], "\n", NULL);
 		return (EXIT_FAILURE);
 	}
 
+	mm.args[2] = NULL;
+	mm.stack = NULL;
+	mm.count = 0;
 	while (1)
 	{
-		count = line_count();
-		line = extract_line(fd);
-		if (!line)
+		mm.count++;
+		mm.line = extract_line(mm.fd);
+		if (!(mm.line))
 			break;
-		parse_line(line)
-		free(line);
+		parse_line(&mm);
+		free(mm.line);
+		find_op(&mm);
+		free_matrix(mm.args);
 	}
-	close(fd);
+	free_stack(mm.stack);
+	close(mm.fd);
 	return (EXIT_SUCCESS);
 }

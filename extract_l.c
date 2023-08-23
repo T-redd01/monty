@@ -2,6 +2,12 @@
 
 #define BUFFSIZE 1024
 
+/**
+ * _getc - get a character from an fd
+ * @fd: fiel with chars
+ *
+ * Return: read character
+ */
 char _getc(int fd)
 {
 	char c;
@@ -13,16 +19,23 @@ char _getc(int fd)
 	return (c);
 }
 
-char *allocator(int fd, char *container, size_t l_idx,
-		char *buff, size_t b_idx)
+/**
+ * allocator - allocates memory according to buffer size for line
+ * @fd: file descriptor
+ * @container: current line / string
+ * @l_idx: size of curret line
+ * @b_idx: num of chars in buff - 1
+ *
+ * Return: newly allocated memory space
+ */
+char *allocator(int fd, char *container, size_t l_idx, size_t b_idx)
 {
-	size_t i;
 	char *new = NULL;
 
 	new = malloc((l_idx + b_idx + 2) * sizeof(char));
 	if (!new)
 	{
-		dprintf(2, "Error: malloc failed\n");
+		err_writer("Error: malloc failed\n", NULL, NULL, NULL);
 		if (container)
 			free(container);
 		close(fd);
@@ -38,13 +51,18 @@ char *allocator(int fd, char *container, size_t l_idx,
 	return (new);
 }
 
-
+/**
+ * extract_line - get line from file
+ * @fd: file descriptor
+ *
+ * Return: line from file
+ */
 char *extract_line(int fd)
 {
 	char c, buff[BUFFSIZE], *line = NULL;
 	size_t b_idx = 0, l_idx = 0;
 
-	while (c = _getc(fd))
+	while ((c = _getc(fd)))
 	{
 		buff[b_idx] = c;
 		if (b_idx == 1022)
@@ -52,11 +70,11 @@ char *extract_line(int fd)
 			buff[b_idx + 1] = '\0';
 			if (buff[b_idx] == '\n')
 			{
-				line = allocator(fd, line, l_idx, buff, b_idx);
+				line = allocator(fd, line, l_idx, b_idx);
 				strcat(line, buff);
 				return (line);
 			}
-			line = allocator(fd, line, l_idx, buff, b_idx);
+			line = allocator(fd, line, l_idx, b_idx);
 			strcat(line, buff);
 			l_idx += b_idx + 1;
 			b_idx = 0;
@@ -65,7 +83,7 @@ char *extract_line(int fd)
 		if (buff[b_idx] == '\n')
 		{
 			buff[b_idx + 1] = '\0';
-			line = allocator(fd, line, l_idx, buff, b_idx);
+			line = allocator(fd, line, l_idx, b_idx);
 			strcat(line, buff);
 			return (line);
 		}
@@ -73,3 +91,4 @@ char *extract_line(int fd)
 	}
 	return (NULL);
 }
+

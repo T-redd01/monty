@@ -18,9 +18,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -33,15 +33,54 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/**
+ * struct cache_s - holds memory for parsing
+ * @fd: currently open file descriptor to extract code lines
+ * @count: current line number
+ * @line: line extracted from fd
+ * @args: vector of args extracted from line
+ * @stack: stack data structure
+ *
+ * Description: keeps track of resource needed to free on err
+ */
+typedef struct cache_s
+{
+	int fd;
+	size_t count;
+	char *line;
+	char *args[3];
+	stack_t *stack;
+} cache_t;
+
+extern char *val;
 
 /*********************** UTILS ***/
 /* helper_1 */
 size_t line_count(void);
+void err_writer(char *arg1, char *arg2, char *arg3, char *arg4);
+void free_matrix(char **matrix);
+int get_val(char *word);
+
+/* helper_2 */
+void write_num(unsigned int num);
+void free_stack(stack_t *top);
 
 /* extract_l */
 char *extract_line(int fd);
+
+/* parser */
+void parse_line(cache_t *mm);
+
+/* find_op */
+void is_dig(char *word, unsigned int ln);
+void push_op(stack_t **stack, unsigned int line_number, char *val);
+void find_op(cache_t *mm);
+
+/* ops_1 */
+void pall_op(stack_t **stack, unsigned int line_number);
 
 #endif
