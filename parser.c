@@ -8,7 +8,7 @@
  *
  * Return: word from line
  */
-char *extract_word(__attribute__((unused))int fd, char *line, size_t *idx)
+char *extract_word(int fd, char *line, size_t *idx)
 {
 	size_t len = 0, p = *idx;
 	char *new = NULL;
@@ -22,10 +22,8 @@ char *extract_word(__attribute__((unused))int fd, char *line, size_t *idx)
 	new = malloc((len + 1) * sizeof(char));
 	if (!new)
 	{
-		/*
-		 * free(line);
-		 * close(fd);
-		 */
+		free(line);
+		close(fd);
 		err_writer("Error: malloc failed\n", NULL, NULL, NULL);
 		exit(EXIT_FAILURE);
 	}

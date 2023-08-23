@@ -1,6 +1,19 @@
 #include "monty.h"
 
 /**
+ * not_found_err - opcode was not found
+ * @lnum: current line number
+ * @opcode: incorrect opcode
+ */
+void not_found_err(unsigned int lnum, char *opcode)
+{
+	err_writer("L", NULL, NULL, NULL);
+	write_num(lnum);
+	err_writer(": unknown instruction ", opcode, "\n", NULL);
+	exit(EXIT_FAILURE);
+}
+
+/**
  * is_dig - checks if string contains non numeric char
  * @word: strign to check
  * @ln: line number
@@ -75,11 +88,11 @@ void find_op(cache_t *mm)
 	int i;
 	instruction_t ops[] = {
 		{"pall", pall_op},
-		{"pint", NULL},
-		{"pop", NULL},
-		{"swap", NULL},
-		{"add", NULL},
-		{"nop", NULL},
+		{"pint", pint_op},
+		{"pop", pop_op},
+		{"swap", swap_op},
+		{"add", add_op},
+		{"nop", nop_op},
 		{"sub", NULL},
 		{"div", NULL},
 		{"mul", NULL},
@@ -110,5 +123,6 @@ void find_op(cache_t *mm)
 			return;
 		}
 	}
+	not_found_err(mm->count, mm->args[0]);
 }
 

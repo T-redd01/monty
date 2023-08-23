@@ -82,5 +82,13 @@ void find_op(cache_t *mm);
 
 /* ops_1 */
 void pall_op(stack_t **stack, unsigned int line_number);
+void pint_op(stack_t **stack, unsigned int line_number);
+void pop_op(stack_t **stack, unsigned int line_number);
+void swap_op(stack_t **stack, unsigned int line_number);
+void add_op(stack_t **stack, unsigned int line_number);
+
+/* ops_2 */
+void nop_op(stack_t **stack, unsigned int line_number);
+void sub_op(stack_t **stack, unsigned int line_number);
 
 #endif

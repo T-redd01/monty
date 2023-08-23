@@ -10,11 +10,11 @@ void _strrev(char *buff)
 	char c;
 
 	len = strlen(buff) / 2;
-	for (i = 0, j = (strlen(buff) - 1); i <= len; i++, j--)
+	for (i = 0, j = (strlen(buff) - 1); i != len; i++, j--)
 	{
 		c = buff[i];
-		buff[i] = buff[j];
-		buff[j] = c;
+		*(buff + i) = *(buff + j);
+		*(buff + j) = c;
 	}
 }
 

@@ -1,14 +1,30 @@
+push 1
+push 10
+#swap
+add
 
+nop here
+
+push 3
 push 2
-  push 3
-                   pall    
+push 1
 
+# should display 1
+pint
 
-                          
-#this is a comemnt
-push 4 some more words
+nop here
 
-    push 5    
-      push    6        
-pall some extra words here
+pop
+#should display 2
+pint
+nop
+
+pop
+#should display  3
+pint
+
+nop
+pop
+#should display an error here
+pint
 
