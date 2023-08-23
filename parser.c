@@ -22,8 +22,8 @@ char *extract_word(int fd, char *line, size_t *idx)
 	new = malloc((len + 1) * sizeof(char));
 	if (!new)
 	{
-		free(line);
-		close(fd);
+		/*free(line);
+		close(fd);*/
 		err_writer("Error: malloc failed\n", NULL, NULL, NULL);
 		exit(EXIT_FAILURE);
 	}
