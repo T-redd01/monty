@@ -54,7 +54,7 @@ void div_op(stack_t **stack, unsigned int line_number)
 
 	if (tmp->n == 0)
 	{
-		err_writer("L");
+		err_writer("L", NULL, NULL, NULL);
 		write_num(line_number);
 		err_writer(": division by zero\n", NULL, NULL, NULL);
 		exit(EXIT_FAILURE);
@@ -106,7 +106,7 @@ void mod_op(stack_t **stack, unsigned int line_number)
 
 	if (tmp->n == 0)
 	{
-		err_writer("L");
+		err_writer("L", NULL, NULL, NULL);
 		write_num(line_number);
 		err_writer(": division by zero\n", NULL, NULL, NULL);
 		exit(EXIT_FAILURE);
@@ -116,5 +116,4 @@ void mod_op(stack_t **stack, unsigned int line_number)
 	tmp->next->prev = NULL;
 	free(tmp);
 }
-
 
