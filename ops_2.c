@@ -27,6 +27,7 @@ void sub_op(stack_t **stack, unsigned int line_number)
 		err_writer("L", NULL, NULL, NULL);
 		write_num(line_number);
 		err_writer(": can't sub, stack too short\n", NULL, NULL, NULL);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	tmp->next->n -= tmp->n;

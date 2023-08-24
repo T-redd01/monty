@@ -1,5 +1,14 @@
-# only                         
-# comments 
-                                    #in 
-                        #this                          
-                         fi #le
+push 6
+push 5
+
+add
+
+push 4
+push 3
+
+sub
+
+push 2
+push 1
+
+pall
