@@ -111,7 +111,6 @@ void find_op(cache_t *mm)
 
 	if (mm->args[0] == NULL)
 		return;
-
 	for (i = 0; ops[i].opcode; i++)
 	{
 		if (!(strcmp("push", mm->args[0])))
@@ -120,7 +119,6 @@ void find_op(cache_t *mm)
 			push_op(&(mm->stack), mm->count, mm->args[1]);
 			return;
 		}
-
 		if (!(strcmp(ops[i].opcode, mm->args[0])))
 		{
 			free_matrix(mm->args);

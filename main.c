@@ -38,7 +38,6 @@ int main(int ac, char **av)
 		parse_line(&mm);
 		free(mm.line);
 		find_op(&mm);
-		//free_matrix(mm.args);
 	}
 	free_stack(mm.stack);
 	close(mm.fd);
