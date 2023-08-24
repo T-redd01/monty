@@ -5,11 +5,12 @@
  * @lnum: current line number
  * @opcode: incorrect opcode
  */
-void not_found_err(unsigned int lnum, char *opcode)
+void not_found_err(unsigned int lnum, char **opcode)
 {
 	err_writer("L", NULL, NULL, NULL);
 	write_num(lnum);
-	err_writer(": unknown instruction ", opcode, "\n", NULL);
+	err_writer(": unknown instruction ", opcode[0], "\n", NULL);
+	free_matrix(opcode);
 	exit(EXIT_FAILURE);
 }
 
@@ -126,6 +127,6 @@ void find_op(cache_t *mm)
 			return;
 		}
 	}
-	not_found_err(mm->count, mm->args[0]);
+	not_found_err(mm->count, mm->args);
 }
 

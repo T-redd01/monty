@@ -37,3 +37,19 @@ void free_matrix(char **matrix)
 		free(matrix[i]);
 }
 
+/**
+ * print_matrix - prints 2d array
+ * @matrix: 2d array
+ */
+void print_matrix(char **matrix)
+{
+	int i;
+
+	if (!matrix || !(*matrix))
+		return;
+
+	for (i = 0; matrix[i]; i++)
+		printf("%s\n", matrix[i]);
+	printf("\n");
+}
+

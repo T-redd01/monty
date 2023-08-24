@@ -60,10 +60,9 @@ extern char *val;
 
 /*********************** UTILS ***/
 /* helper_1 */
-size_t line_count(void);
 void err_writer(char *arg1, char *arg2, char *arg3, char *arg4);
 void free_matrix(char **matrix);
-int get_val(char *word);
+void print_matrix(char **matrix);
 
 /* helper_2 */
 void write_num(unsigned int num);
