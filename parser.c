@@ -79,7 +79,10 @@ void parse_line(cache_t *mm)
 		if (ln[i] != ' ')
 		{
 			if (ln[i] == '#')
+			{
+				free_matrix(mm->args);
 				break;
+			}
 			mm->args[words++] = extract_word(mm->fd, ln, &i);
 		}
 
