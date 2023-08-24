@@ -33,7 +33,7 @@ int main(int ac, char **av)
 	while (1)
 	{
 		mm.count++;
-		mm.line = extract_line(mm.fd);
+		mm.line = extract_line(mm.stack, mm.fd);
 		if (!(mm.line))
 			break;
 		parse_line(&mm);

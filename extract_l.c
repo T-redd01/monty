@@ -21,6 +21,7 @@ char _getc(int fd)
 
 /**
  * allocator - allocates memory according to buffer size for line
+ * @stk: list of data
  * @fd: file descriptor
  * @container: current line / string
  * @l_idx: size of curret line
@@ -28,7 +29,8 @@ char _getc(int fd)
  *
  * Return: newly allocated memory space
  */
-char *allocator(int fd, char *container, size_t l_idx, size_t b_idx)
+char *allocator(stack_t *stk, int fd, char *container,
+		size_t l_idx, size_t b_idx)
 {
 	char *new = NULL;
 
@@ -38,6 +40,7 @@ char *allocator(int fd, char *container, size_t l_idx, size_t b_idx)
 		err_writer("Error: malloc failed\n", NULL, NULL, NULL);
 		if (container)
 			free(container);
+		free_stack(stk);
 		close(fd);
 		exit(EXIT_FAILURE);
 	}
@@ -53,11 +56,12 @@ char *allocator(int fd, char *container, size_t l_idx, size_t b_idx)
 
 /**
  * extract_line - get line from file
+ * @stk: list of data
  * @fd: file descriptor
  *
  * Return: line from file
  */
-char *extract_line(int fd)
+char *extract_line(stack_t *stk, int fd)
 {
 	char c, buff[BUFFSIZE], *line = NULL;
 	size_t b_idx = 0, l_idx = 0;
@@ -70,11 +74,11 @@ char *extract_line(int fd)
 			buff[b_idx + 1] = '\0';
 			if (buff[b_idx] == '\n')
 			{
-				line = allocator(fd, line, l_idx, b_idx);
+				line = allocator(stk, fd, line, l_idx, b_idx);
 				strcat(line, buff);
 				return (line);
 			}
-			line = allocator(fd, line, l_idx, b_idx);
+			line = allocator(stk, fd, line, l_idx, b_idx);
 			strcat(line, buff);
 			l_idx += b_idx + 1;
 			b_idx = 0;
@@ -83,7 +87,7 @@ char *extract_line(int fd)
 		if (buff[b_idx] == '\n')
 		{
 			buff[b_idx + 1] = '\0';
-			line = allocator(fd, line, l_idx, b_idx);
+			line = allocator(stk, fd, line, l_idx, b_idx);
 			strcat(line, buff);
 			return (line);
 		}
