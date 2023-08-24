@@ -49,6 +49,7 @@ void div_op(stack_t **stack, unsigned int line_number)
 		err_writer("L", NULL, NULL, NULL);
 		write_num(line_number);
 		err_writer(": can't div, stack too short\n", NULL, NULL, NULL);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -57,6 +58,7 @@ void div_op(stack_t **stack, unsigned int line_number)
 		err_writer("L", NULL, NULL, NULL);
 		write_num(line_number);
 		err_writer(": division by zero\n", NULL, NULL, NULL);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	tmp->next->n /= tmp->n;
@@ -79,6 +81,7 @@ void mul_op(stack_t **stack, unsigned int line_number)
 		err_writer("L", NULL, NULL, NULL);
 		write_num(line_number);
 		err_writer(": can't mul, stack too short\n", NULL, NULL, NULL);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	tmp->next->n *= tmp->n;
@@ -101,6 +104,7 @@ void mod_op(stack_t **stack, unsigned int line_number)
 		err_writer("L", NULL, NULL, NULL);
 		write_num(line_number);
 		err_writer(": can't mod, stack too short\n", NULL, NULL, NULL);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -109,6 +113,7 @@ void mod_op(stack_t **stack, unsigned int line_number)
 		err_writer("L", NULL, NULL, NULL);
 		write_num(line_number);
 		err_writer(": division by zero\n", NULL, NULL, NULL);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	tmp->next->n %= tmp->n;
