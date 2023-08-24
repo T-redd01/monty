@@ -1,30 +1,15 @@
-push 1
-push 10
-#swap
-add
+pall # empty line
 
-nop here
 
+push 5
+push  4
 push 3
-push 2
-push 1
+push                 2
+push 1                  
 
-# should display 1
+nop      
+
 pint
 
-nop here
-
-pop
-#should display 2
-pint
-nop
-
-pop
-#should display  3
-pint
-
-nop
-pop
-#should display an error here
-pint
-
+                 pall
+pall#
