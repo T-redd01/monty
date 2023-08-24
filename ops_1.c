@@ -14,7 +14,6 @@ void pall_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
 	}
-	printf("\n");
 }
 
 /**
@@ -53,7 +52,9 @@ void pop_op(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	tmp = *stack;
-	*stack = (*stack)->next;
+	*stack = tmp->next;
+	if (tmp->next)
+		tmp->next->prev = NULL;
 	free(tmp);
 }
 
