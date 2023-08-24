@@ -57,7 +57,7 @@ void is_dig(char *word, unsigned int ln)
 void push_op(stack_t **stack, unsigned int line_number, char *val)
 {
 	int num;
-	stack_t *new = NULL;
+	stack_t *new = NULL, *tmp = *stack;
 
 	is_dig(val, line_number);
 	new = malloc(sizeof(stack_t));
@@ -76,6 +76,15 @@ void push_op(stack_t **stack, unsigned int line_number, char *val)
 	if (!(*stack))
 	{
 		*stack = new;
+		return;
+	}
+
+	if (format)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		new->prev = tmp;
 		return;
 	}
 	new->next = *stack;
@@ -105,8 +114,8 @@ void find_op(cache_t *mm)
 		{"pstr", pstr_op},
 		{"rotl", rotl_op},
 		{"rotr", rotr_op},
-		{"stack", NULL},
-		{"queue", NULL},
+		{"stack", stack_op},
+		{"queue", queue_op},
 		{NULL, NULL}
 	};
 

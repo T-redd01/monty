@@ -56,7 +56,7 @@ typedef struct cache_s
 	stack_t *stack;
 } cache_t;
 
-extern char *val;
+extern int format; /* 1 means queue, zero means stack (default) */
 
 /*********************** UTILS ***/
 /* helper_1 */
@@ -98,5 +98,9 @@ void pchar_op(stack_t **stack, unsigned int line_number);
 void pstr_op(stack_t **stack, unsigned int line_number);
 void rotl_op(stack_t **stack, unsigned int line_number);
 void rotr_op(stack_t **stack, unsigned int line_number);
+
+/* op_4 */
+void stack_op(stack_t **stack, unsigned int line_number);
+void queue_op(stack_t **stack, unsigned int line_number);
 
 #endif

@@ -1,6 +1,6 @@
 #include "monty.h"
 
-char *val;
+int format;
 
 /**
  * main - Entry point
@@ -29,6 +29,7 @@ int main(int ac, char **av)
 	mm.args[2] = NULL;
 	mm.stack = NULL;
 	mm.count = 0;
+	format = 0;
 	while (1)
 	{
 		mm.count++;
