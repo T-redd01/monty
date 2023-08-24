@@ -69,13 +69,19 @@ void parse_line(cache_t *mm)
 
 	mm->args[0] = NULL;
 	mm->args[1] = NULL;
-	if ((is_comment(ln)))
-		return;
+	/**
+	 * if ((is_comment(ln)))
+	 * return;
+	 */
 
 	for (i = 0; ln[i] && ln[i] != '\n'; i++)
 	{
 		if (ln[i] != ' ')
+		{
+			if (ln[i] == '#')
+				break;
 			mm->args[words++] = extract_word(mm->fd, ln, &i);
+		}
 
 		if (words == 2)
 			break;
@@ -84,3 +90,4 @@ void parse_line(cache_t *mm)
 			i--;
 	}
 }
+
