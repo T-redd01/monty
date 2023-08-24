@@ -1,14 +1,48 @@
-push 6
-push 5
+rotl
 
-add
+push 44
+pchar
+pop
+pall
 
-push 4
-push 3
-
-sub
-
-push 2
 push 1
 
+push 44
+pchar
+pop
+pall
+
+rotl
+
+push 44
+pchar
+pop
+pall
+
+push 2
+
+push 44
+pchar
+pop
+pall
+
+rotl
+
+push 44
+pchar
+pop
+pall
+
+push 3
+
+push 44
+pchar
+pop
+pall
+
+rotl
+
+push 44
+pchar
+pop
 pall
