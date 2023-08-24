@@ -70,6 +70,8 @@ void free_stack(stack_t *top);
 
 /* extract_l */
 char *extract_line(int fd);
+char *extract_word(stack_t *stk, int fd, char *line, size_t *idx);
+int is_comment(char *line);
 
 /* parser */
 void parse_line(cache_t *mm);

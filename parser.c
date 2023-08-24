@@ -2,13 +2,14 @@
 
 /**
  * extract_word - get word from line
+ * @stk: list of data
  * @fd: resource file descriptor
  * @line: line with words
  * @idx: pointer to index in line
  *
  * Return: word from line
  */
-char *extract_word(int fd, char *line, size_t *idx)
+char *extract_word(stack_t *stk, int fd, char *line, size_t *idx)
 {
 	size_t len = 0, p = *idx;
 	char *new = NULL;
@@ -24,6 +25,7 @@ char *extract_word(int fd, char *line, size_t *idx)
 	{
 		free(line);
 		close(fd);
+		free_stack(stk);
 		err_writer("Error: malloc failed\n", NULL, NULL, NULL);
 		exit(EXIT_FAILURE);
 	}
@@ -75,7 +77,7 @@ void parse_line(cache_t *mm)
 	for (i = 0; ln[i] && ln[i] != '\n'; i++)
 	{
 		if (ln[i] != ' ')
-			mm->args[words++] = extract_word(mm->fd, ln, &i);
+			mm->args[words++] = extract_word(mm->stack, mm->fd, ln, &i);
 
 		if (words == 2)
 			break;
