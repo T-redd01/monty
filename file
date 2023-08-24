@@ -1,6 +1,6 @@
 pall # empty line
 
-
+add                               
 push 5
 push  4
 push 3
@@ -12,4 +12,3 @@ nop
 pint
 
                  pall
-pall#

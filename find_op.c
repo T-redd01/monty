@@ -42,6 +42,7 @@ void is_dig(char *word, unsigned int ln)
 		err_writer("L", NULL, NULL, NULL);
 		write_num(ln);
 		err_writer(": usage: push integer\n", NULL, NULL, NULL);
+		free(word);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -62,9 +63,11 @@ void push_op(stack_t **stack, unsigned int line_number, char *val)
 	if (!new)
 	{
 		err_writer("Error: malloc failed\n", NULL, NULL, NULL);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	num = atoi(val);
+	free(val);
 	new->n = num;
 	new->prev = NULL;
 	new->next = NULL;
@@ -113,12 +116,14 @@ void find_op(cache_t *mm)
 	{
 		if (!(strcmp("push", mm->args[0])))
 		{
+			free(mm->args[0]);
 			push_op(&(mm->stack), mm->count, mm->args[1]);
 			return;
 		}
 
 		if (!(strcmp(ops[i].opcode, mm->args[0])))
 		{
+			free_matrix(mm->args);
 			ops[i].f(&(mm->stack), mm->count);
 			return;
 		}
