@@ -27,7 +27,7 @@ void is_dig(stack_t *stk, char *word, unsigned int ln)
 	if (!word)
 		flag = 1;
 
-	if (word[0] == '-')
+	if (word && word[0] == '-')
 		i = 1;
 
 	for (; word && word[i]; i++)
