@@ -77,7 +77,7 @@ int is_comment(char *line);
 void parse_line(cache_t *mm);
 
 /* find_op */
-void is_dig(char *word, unsigned int ln);
+void is_dig(stack_t *stk, char *word, unsigned int ln);
 void push_op(stack_t **stack, unsigned int line_number, char *val);
 void find_op(cache_t *mm);
 

@@ -16,10 +16,11 @@ void not_found_err(unsigned int lnum, char **opcode)
 
 /**
  * is_dig - checks if string contains non numeric char
+ * @stk: list of data
  * @word: strign to check
  * @ln: line number
  */
-void is_dig(char *word, unsigned int ln)
+void is_dig(stack_t *stk, char *word, unsigned int ln)
 {
 	int i = 0, flag = 0;
 
@@ -44,6 +45,7 @@ void is_dig(char *word, unsigned int ln)
 		write_num(ln);
 		err_writer(": usage: push integer\n", NULL, NULL, NULL);
 		free(word);
+		free_stack(stk);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -59,7 +61,7 @@ void push_op(stack_t **stack, unsigned int line_number, char *val)
 	int num;
 	stack_t *new = NULL, *tmp = *stack;
 
-	is_dig(val, line_number);
+	is_dig(*stack, val, line_number);
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
